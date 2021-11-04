@@ -13,9 +13,22 @@ namespace CrearFormularioClientes
 {
     public partial class Clientes : Form
     {
+        /*
+         * Elementos que tiene este formulario distintos al principal
+         * 1 - TextBox
+         * 2 - MaskedTextBox
+         * 3 - ErrorProvider
+         * 4 - Expresión regular (email)
+         * 5 - MonthCalendar
+         * 6 - ComboBox
+         * 7 - NumericUpDown
+        */
+
+
         private DataGridView dgv;
         private DataGridViewCellCollection fila;
         private Estilos estilo = new Estilos();
+        private int codigo = 1;
         // Estas variables se necesitan para mover el formulario
         int x, y;
         Boolean movimiento;
@@ -40,6 +53,10 @@ namespace CrearFormularioClientes
 
         private void Clientes_Load(object sender, EventArgs e)
         {
+            // Establezco que solo se pueda seleccionar 1 solo día
+            // en el calendario
+            mcAlta.MaxSelectionCount = 1;
+            // Le doy estilos al formulario
             estilo.estiloFormulario(this, "alta", "claro");
             estilo.estiloPanelSuperior(pnlSuperior);
             estilo.estiloPanelCabecera(pnlCabecera);
@@ -115,6 +132,7 @@ namespace CrearFormularioClientes
         // Método validar dni
         private void validarDni(object sender, PreviewKeyDownEventArgs e)
         {
+            // Creo un array de caracteres y mediante la formula compruebo si coincide la letra
             char[] letra = { 't', 'r', 'w', 'a', 'g', 'm', 'y', 'f', 'p', 'd', 'x', 'b', 'n', 'j', 'z', 's', 'q', 'v', 'h', 'l', 'c', 'k', 'e' };
             if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Tab)
             {
@@ -133,6 +151,7 @@ namespace CrearFormularioClientes
         {
             if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Tab)
             {
+                // Creo un expresión regular para comprobar si el correo introducido es válido
                 Regex regex = new Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
                 bool isValid = regex.IsMatch(this.mtxEmail.Text.Trim());
                 if (!isValid)
@@ -147,7 +166,41 @@ namespace CrearFormularioClientes
         // Método para guardar los datos del alta en el DGV
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(this.dgv);
+            fila.Cells[0].Value = this.codigo;
+            // Aumento el valor de código
+            this.codigo++;
+            fila.Cells[1].Value = this.txNombre.Text;
+            fila.Cells[2].Value = this.txApellido1.Text;
+            fila.Cells[3].Value = this.txApellido2.Text;
+            fila.Cells[4].Value = this.mtxDni.Text;
+            fila.Cells[5].Value = this.mtxEmail.Text;
+            // Obtengo el día seleccionado del calendario y le doy el formato
+            fila.Cells[6].Value = this.mcAlta.SelectionRange.Start.ToString("dd/MM/yyyy");
+            fila.Cells[7].Value = this.cbPreferencia.SelectedItem.ToString();
+            fila.Cells[8].Value = this.numSaldo.Text;
+            // Agrego la fila al DGV
+            dgv.Rows.Add(fila);
+            // Cierro el formulario de Alta
+            this.Close();
+        }
 
+        private void btnCargarImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog BuscarImagen = new OpenFileDialog(); BuscarImagen.Filter = "Archivos de Imagen|*.jpg";
+            //Aquí incluiremos los filtros que queramos.
+            BuscarImagen.FileName = "";
+            BuscarImagen.Title = "Titulo del Dialogo";
+            BuscarImagen.InitialDirectory = "C:\\";
+            if (BuscarImagen.ShowDialog() == DialogResult.OK)
+            {
+                /// Si esto se cumple, capturamos la propiedad File Name y la guardamos en el control
+                String Direccion = BuscarImagen.FileName; this.pbAvatar.ImageLocation = Direccion;
+                //Pueden usar tambien esta forma para cargar la Imagen solo activenla y comenten la linea donde se cargaba anteriormente 
+                //this.pictureBox1.ImageLocation = textBox1.Text;
+                pbAvatar.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
 
         // Método para cerrar la ventana de Clientes

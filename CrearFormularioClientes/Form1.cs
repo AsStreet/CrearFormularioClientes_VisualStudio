@@ -12,6 +12,23 @@ namespace CrearFormularioClientes
 {
     public partial class Form1 : Form
     {
+
+        /*
+         * Elementos que tiene el formulario:
+         * 1 - Label
+         * 2 - PictureBox
+         * 3 - GroupBox
+         * 4 - RadioButton
+         * 5 - Minemonic (Los temas)
+         * 6 - Button
+         * 7 - TabControl
+         * 8 - DataGridView
+         * 9 - Timer
+         * 10 - Panel
+         * 
+        */
+
+
         // Estas variables se necesitan para mover el formulario
         int x, y;
         Boolean movimiento;
@@ -57,6 +74,8 @@ namespace CrearFormularioClientes
             // Establecer estilos elementos del panel contenido del formulario
             estilo.estiloTabControl(tcContenidoInicio);
             estilo.estiloDatagridview(dgvInicio);
+            // Establecer estilo PictureBox Avatar
+            estilo.estiloImagen(this.pbAvatarInicio);
             // Establecer tipo de datos del DataGridView 
             definirDatos();
         }
@@ -130,7 +149,17 @@ namespace CrearFormularioClientes
         // Método del Timer para ir actualizando la hora cada segundo
         private void timerHora_Tick(object sender, EventArgs e)
         {
+            // Cambio la hora
             estilo.estiloHora();
+            // Compruebo si se ha cambiado el tema pulsando la C o la O
+            if (rbTemaClaroInicio.Checked)
+            {
+                estilo.estiloFormulario(this, rbTemaClaroInicio.Text.ToLower());
+            }
+            if (rbTemaOscuroInicio.Checked)
+            {
+                estilo.estiloFormulario(this, rbTemaOscuroInicio.Text.ToLower());
+            }
         }
 
         // Método para abrir formulario de Nuevo cliente al hacer doble clic sobre el DGV
@@ -138,6 +167,23 @@ namespace CrearFormularioClientes
         {
             Clientes cliente = new Clientes(ref dgvInicio);
             cliente.Show();
+        }
+
+        private void pbAvatarInicio_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog BuscarImagen = new OpenFileDialog(); BuscarImagen.Filter = "Archivos de Imagen|*.jpg";
+            //Aquí incluiremos los filtros que queramos.
+            BuscarImagen.FileName = "";
+            BuscarImagen.Title = "Titulo del Dialogo";
+            BuscarImagen.InitialDirectory = "C:\\";
+            if (BuscarImagen.ShowDialog() == DialogResult.OK)
+            {
+                /// Si esto se cumple, capturamos la propiedad File Name y la guardamos en el control
+                String Direccion = BuscarImagen.FileName; this.pbAvatarInicio.ImageLocation = Direccion;
+                //Pueden usar tambien esta forma para cargar la Imagen solo activenla y comenten la linea donde se cargaba anteriormente 
+                //this.pictureBox1.ImageLocation = textBox1.Text;
+                pbAvatarInicio.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
 
         // Método para cambiar el tema del formulario al hacer clic en los radiobuttons

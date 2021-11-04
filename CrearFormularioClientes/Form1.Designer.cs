@@ -36,6 +36,7 @@ namespace CrearFormularioClientes
             this.gbTemasInicio = new System.Windows.Forms.GroupBox();
             this.rbTemaOscuroInicio = new System.Windows.Forms.RadioButton();
             this.rbTemaClaroInicio = new System.Windows.Forms.RadioButton();
+            this.pbAvatarInicio = new System.Windows.Forms.PictureBox();
             this.lblNombreEmpleadoInicio = new System.Windows.Forms.Label();
             this.btnCerrarInicio = new System.Windows.Forms.Button();
             this.btnMaximizarInicio = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace CrearFormularioClientes
             this.tbpCitasContenidoInicio = new System.Windows.Forms.TabPage();
             this.pnlContenidoInicio = new System.Windows.Forms.Panel();
             this.timerHora = new System.Windows.Forms.Timer(this.components);
-            this.pbAvatarInicio = new System.Windows.Forms.PictureBox();
             this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellido1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,15 +59,16 @@ namespace CrearFormularioClientes
             this.creacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.preferente = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblAyudaAvatar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInicio)).BeginInit();
             this.pnlCabeceraInicio.SuspendLayout();
             this.gbTemasInicio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatarInicio)).BeginInit();
             this.pnlBordeSuperior.SuspendLayout();
             this.pnlPieInicio.SuspendLayout();
             this.tcContenidoInicio.SuspendLayout();
             this.tbpContenidoClientesInicio.SuspendLayout();
             this.pnlContenidoInicio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAvatarInicio)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvInicio
@@ -100,6 +101,7 @@ namespace CrearFormularioClientes
             // 
             // pnlCabeceraInicio
             // 
+            this.pnlCabeceraInicio.Controls.Add(this.lblAyudaAvatar);
             this.pnlCabeceraInicio.Controls.Add(this.gbTemasInicio);
             this.pnlCabeceraInicio.Controls.Add(this.pbAvatarInicio);
             this.pnlCabeceraInicio.Controls.Add(this.lblNombreEmpleadoInicio);
@@ -126,7 +128,7 @@ namespace CrearFormularioClientes
             this.rbTemaOscuroInicio.Name = "rbTemaOscuroInicio";
             this.rbTemaOscuroInicio.Size = new System.Drawing.Size(59, 17);
             this.rbTemaOscuroInicio.TabIndex = 1;
-            this.rbTemaOscuroInicio.Text = "Oscuro";
+            this.rbTemaOscuroInicio.Text = "&Oscuro";
             this.rbTemaOscuroInicio.UseVisualStyleBackColor = true;
             this.rbTemaOscuroInicio.Click += new System.EventHandler(this.cambioEstilo_Click);
             // 
@@ -137,9 +139,18 @@ namespace CrearFormularioClientes
             this.rbTemaClaroInicio.Name = "rbTemaClaroInicio";
             this.rbTemaClaroInicio.Size = new System.Drawing.Size(49, 17);
             this.rbTemaClaroInicio.TabIndex = 0;
-            this.rbTemaClaroInicio.Text = "Claro";
+            this.rbTemaClaroInicio.Text = "&Claro";
             this.rbTemaClaroInicio.UseVisualStyleBackColor = true;
             this.rbTemaClaroInicio.Click += new System.EventHandler(this.cambioEstilo_Click);
+            // 
+            // pbAvatarInicio
+            // 
+            this.pbAvatarInicio.Location = new System.Drawing.Point(43, 11);
+            this.pbAvatarInicio.Name = "pbAvatarInicio";
+            this.pbAvatarInicio.Size = new System.Drawing.Size(159, 120);
+            this.pbAvatarInicio.TabIndex = 3;
+            this.pbAvatarInicio.TabStop = false;
+            this.pbAvatarInicio.Click += new System.EventHandler(this.pbAvatarInicio_Click);
             // 
             // lblNombreEmpleadoInicio
             // 
@@ -247,7 +258,7 @@ namespace CrearFormularioClientes
             this.tbpCitasContenidoInicio.Location = new System.Drawing.Point(4, 22);
             this.tbpCitasContenidoInicio.Name = "tbpCitasContenidoInicio";
             this.tbpCitasContenidoInicio.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCitasContenidoInicio.Size = new System.Drawing.Size(738, 343);
+            this.tbpCitasContenidoInicio.Size = new System.Drawing.Size(932, 343);
             this.tbpCitasContenidoInicio.TabIndex = 1;
             this.tbpCitasContenidoInicio.Text = "Citas";
             this.tbpCitasContenidoInicio.UseVisualStyleBackColor = true;
@@ -265,14 +276,6 @@ namespace CrearFormularioClientes
             this.timerHora.Enabled = true;
             this.timerHora.Interval = 1000;
             this.timerHora.Tick += new System.EventHandler(this.timerHora_Tick);
-            // 
-            // pbAvatarInicio
-            // 
-            this.pbAvatarInicio.Location = new System.Drawing.Point(43, 11);
-            this.pbAvatarInicio.Name = "pbAvatarInicio";
-            this.pbAvatarInicio.Size = new System.Drawing.Size(159, 120);
-            this.pbAvatarInicio.TabIndex = 3;
-            this.pbAvatarInicio.TabStop = false;
             // 
             // codigo
             // 
@@ -311,6 +314,7 @@ namespace CrearFormularioClientes
             // 
             // preferente
             // 
+            this.preferente.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.preferente.HeaderText = "Preferente";
             this.preferente.Items.AddRange(new object[] {
             "SI",
@@ -321,6 +325,17 @@ namespace CrearFormularioClientes
             // 
             this.saldo.HeaderText = "Saldo";
             this.saldo.Name = "saldo";
+            // 
+            // lblAyudaAvatar
+            // 
+            this.lblAyudaAvatar.AutoSize = true;
+            this.lblAyudaAvatar.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAyudaAvatar.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblAyudaAvatar.Location = new System.Drawing.Point(14, 134);
+            this.lblAyudaAvatar.Name = "lblAyudaAvatar";
+            this.lblAyudaAvatar.Size = new System.Drawing.Size(215, 12);
+            this.lblAyudaAvatar.TabIndex = 5;
+            this.lblAyudaAvatar.Text = "Doble Clic sobre el recuadro para cambiar la imagen";
             // 
             // Form1
             // 
@@ -339,13 +354,13 @@ namespace CrearFormularioClientes
             this.pnlCabeceraInicio.PerformLayout();
             this.gbTemasInicio.ResumeLayout(false);
             this.gbTemasInicio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatarInicio)).EndInit();
             this.pnlBordeSuperior.ResumeLayout(false);
             this.pnlPieInicio.ResumeLayout(false);
             this.pnlPieInicio.PerformLayout();
             this.tcContenidoInicio.ResumeLayout(false);
             this.tbpContenidoClientesInicio.ResumeLayout(false);
             this.pnlContenidoInicio.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbAvatarInicio)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -381,6 +396,7 @@ namespace CrearFormularioClientes
         private System.Windows.Forms.DataGridViewTextBoxColumn creacion;
         private System.Windows.Forms.DataGridViewComboBoxColumn preferente;
         private System.Windows.Forms.DataGridViewTextBoxColumn saldo;
+        private System.Windows.Forms.Label lblAyudaAvatar;
     }
 }
 

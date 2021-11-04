@@ -26,6 +26,7 @@ namespace CrearFormularioClientes
         private Panel pnlInferior;
         private TabControl tbContenido;
         private String tema;
+        private PictureBox pbAvatar;
         private ColorConverter cv = new ColorConverter();
 
         public Estilos() { }
@@ -47,12 +48,12 @@ namespace CrearFormularioClientes
                 case "principal":
                     switch (tema)
                     {
-                        case "claro":
-                            this.tema = "claro";
+                        case "&claro":
+                            this.tema = "&claro";
                             this.formulario.BackColor = (Color)cv.ConvertFromString("#e1eff8"); // #D4FFEA  // #e1eff8
                             break;
-                        case "oscuro":
-                            this.tema = "oscuro";
+                        case "&oscuro":
+                            this.tema = "&oscuro";
                             this.formulario.BackColor = (Color)cv.ConvertFromString("#2d2d30"); // #D4FFEA
                             break;
                     }   
@@ -60,12 +61,12 @@ namespace CrearFormularioClientes
                 case "alta":
                     switch (tema)
                     {
-                        case "claro":
-                            this.tema = "claro";
+                        case "&claro":
+                            this.tema = "&claro";
                             this.formulario.BackColor = (Color)cv.ConvertFromString("#e1eff8"); // #D4FFEA  // #e1eff8
                             break;
-                        case "oscuro":
-                            this.tema = "oscuro";
+                        case "&oscuro":
+                            this.tema = "&oscuro";
                             this.formulario.BackColor = (Color)cv.ConvertFromString("#2d2d30"); // #D4FFEA
                             break;
                     }
@@ -81,10 +82,10 @@ namespace CrearFormularioClientes
             this.formulario = nuevo;
             switch (tema)
             {
-                case "claro":
+                case "&claro":
                     this.formulario.BackColor = (Color)cv.ConvertFromString("#e1eff8");
                     break;
-                case "oscuro":
+                case "&oscuro":
                     this.formulario.BackColor = (Color)cv.ConvertFromString("#2d2d30");
                     break;
             }
@@ -185,10 +186,10 @@ namespace CrearFormularioClientes
             // Establecer color de fondo del DataGridView
             switch (this.tema)
             {
-                case "claro":
+                case "&claro":
                     this.dgv.BackgroundColor = (Color)cv.ConvertFromString("#fafafa");
                     break;
-                case "oscuro":
+                case "&oscuro":
                     this.dgv.BackgroundColor = (Color)cv.ConvertFromString("#e1eff8");
                     break;
             }
@@ -298,7 +299,7 @@ namespace CrearFormularioClientes
             this.botonMaximizar.FlatAppearance.BorderSize = 0;
             // Cambiar el color del fondo cuando se pasa el cursor por encima
             this.botonMaximizar.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            this.botonMaximizar.FlatAppearance.MouseOverBackColor = Color.LightCyan;
+            this.botonMaximizar.FlatAppearance.MouseOverBackColor = (Color)cv.ConvertFromString("#dfecf4");
             // Establecer el tamaño y el ancho del botón para después poder posicionarlo
             this.botonMaximizar.Width = 30;
             this.botonMaximizar.Height = 30;
@@ -337,7 +338,7 @@ namespace CrearFormularioClientes
             this.botonMinimizar.FlatAppearance.BorderSize = 0;
             // Cambiar el color del fondo cuando se pasa el cursor por encima
             this.botonMinimizar.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            this.botonMinimizar.FlatAppearance.MouseOverBackColor = Color.LightCyan;
+            this.botonMinimizar.FlatAppearance.MouseDownBackColor = (Color)cv.ConvertFromString("#dfecf4");
             // Establecer el tamaño y el ancho del botón para después poder posicionarlo
             this.botonMinimizar.Width = 30;
             this.botonMinimizar.Height = 30;
@@ -372,6 +373,7 @@ namespace CrearFormularioClientes
                 fondo = new Bitmap(Application.StartupPath + @"\Imagenes\boton_maximizar2.png");
             }
             this.botonMaximizar.Image = fondo;
+            this.botonMaximizar.FlatAppearance.MouseDownBackColor = (Color)cv.ConvertFromString("#dfecf4");
         }
 
         // Método para establecer el estilo del panel superior
@@ -502,6 +504,12 @@ namespace CrearFormularioClientes
         public void estiloHora()
         {
             this.lblHora.Text = "Hora: " + DateTime.Now.ToString("HH:mm:ss"); ;
+        }
+
+        public void estiloImagen(PictureBox nuevo)
+        {
+            this.pbAvatar = nuevo;
+            pbAvatar.BorderStyle = BorderStyle.Fixed3D;
         }
     }
 }
